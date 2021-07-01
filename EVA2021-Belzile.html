@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Informative selection mechanisms for extreme value analyses</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"200","margin":"1em"}</script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Informative selection mechanisms for extreme value analyses
+
+.class-info[
+
+**EVA 2021**
+
+.light[Léo Belzile, HEC Montréal]
+&lt;br&gt;
+Based on joint work with Anthony Davison, Jutta Gampe, Holger Rootzén, Dmitrii Zholud
+]
+
+
+---
+
+class: title title-1 title-1-inv
+
+# Vargas catastrophe
+
+Daily precipitation (in mm) at Maiquetía airport
+
+- Yearly maximum for 1951-1960
+- Daily measurements for 1961-1999
+
+1999 catastrophe: cumulative rainfall of 820mm over 3 days (backcast)
+
+- largest record: ~410mm mid-December.
+- measurements stop shortly after.
+- Accounting (or not) for this observation has a huge impact on inference.
+
+
+---
+
+class: title title-1 title-1-inv
+
+# Inferential strategy
+
+
+
+- Poisson point process formulation: combine yearly maximum with exceedances and stopping rule
+
+- View the largest record as a
+ .section-title-1[**stopping rule** ] : set to `\(s\)`=282mm, the largest two-day sum previously reported in early 1950s
+
+- Observations before trigger are *right-truncated*, the largest record is *left-truncated* at `\(s\)`.
+
+---
+
+class: title title-1 title-1-inv
+
+# Results
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/maiquetia-1.png" alt="Profile likelihood for standard analysis and conditioning on stopping rule (left) and P-P plot of model fitted above 27mm." width="82%" /&gt;
+&lt;p class="caption"&gt;Profile likelihood for standard analysis and conditioning on stopping rule (left) and P-P plot of model fitted above 27mm.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: title title-1 title-1-inv
+
+# How rare was this event?
+
+Q: was the event much larger than one could expect?
+
+Target: median of 50-years maximum
+
+
+Consider one-sided likelihood ratio test
+
+- `\(H_0\)` : median 50-year maximum &gt; 410.4mm,
+
+- `\(p\)`-values 9.5% (unconditional) versus 1.9% (conditional)
+
+.section-title-1[The sampling scheme can have a huge impact on inference.]
+
+---
+
+layout: false
+name: IDL
+class: title title-2
+
+# Estimating human lifespan
+
+The study of longevity is full of pitfalls...
+
+
+The first of which is related to the quality of the data
+
+.box-6.medium.sp-after-half[International Database on Longevity (IDL)]
+
+--
+
+- .section-title-2[ **validated supercentenarian (110+) **] from 13 countries
+
+--
+
+- plus (partly validated) .section-title-2[** semi-supercentenarian (105-109)**] for 9 countries
+
+--
+
+- Age-ascertainement bias-free
+
+
+---
+class: title title-2
+
+# Sampling mechanisms
+
+Data are obtained by .section-title-2[**casting a net**] on the population of potential (semi)-supercentenarians.
+
+--
+
+- for IDL, (only) supercentenarians in a country **who died** between dates `\(c_1\)` and `\(c_2\)`.
+
+--
+
+- records for the candidates are then individually validated.
+
+---
+.box-6.medium.sp-after-half[Lexis diagrams]
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/lexisdiag-1.png" alt="Lexis diagrams showing the selection mechanism." width="82%" /&gt;
+&lt;p class="caption"&gt;Lexis diagrams showing the selection mechanism.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+.box-6.medium.sp-after-half[More complex schemes!]
+
+Semisupercentenarians (105-109) who died in window `\((d_1, d_2)\neq (c_1, c_2)\)`
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/lexisdiag2-1.png" alt="Lexis diagrams for IDL data with semisupercentenarian and supercentenarians" width="85%" /&gt;
+&lt;p class="caption"&gt;Lexis diagrams for IDL data with semisupercentenarian and supercentenarians&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: title title-2  sp-after-half
+
+# Why does it matter?
+
+- .small[Ignoring truncation leads here to underestimation of the survival probability]
+- .small[Because of the population increase and reduction in mortality at lower age, larger impact for later cohorts]
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/artefacts_truncation-1.png" alt="Impact of truncation on quantile-quantile plots (left) and maximum age by birth year (right)." width="65%" /&gt;
+&lt;p class="caption"&gt;Impact of truncation on quantile-quantile plots (left) and maximum age by birth year (right).&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: title title-2
+
+# Complications ahead
+
+Accounting for interval truncation.
+
+- e.g., the plotting position for `\(x\)`-axis of Q-Q plot for observation `\(y_i\)` is
+$$
+F_0^{-1}\left[F_0(a_i) +\left\\{ F_0(b_i)-F_0(a_i) \right\\} \frac{F_n(y_i) - F_n(a_i)}{F_n(b_i)-F_n(a_i)}\right]
+$$
+where
+- `\(F_0\)` is the postulated (i.e., fitted) parametric distribution,
+- `\(F_0^{-1}\)` is the corresponding quantile function,
+- `\(F_n\)` is the NPMLE of the distribution function (Turnbull, 1976).
+
+
+---
+class: title title-2
+
+# Truncation can be hidden
+
+- .section-title-2[ Extinct cohort ]: Birth cohorts for which no death has been reported for X consecutive years.
+- counts cross-tabulated by years of birth, age (rounded down to nearest year) and gender
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="figures/Sibuya_tabular.png" alt="Annual Vital Statistics Report of Japan (Hanamaya &amp;amp; Sibuya, 2014)." width="55%" /&gt;
+&lt;p class="caption"&gt;Annual Vital Statistics Report of Japan (Hanamaya &amp; Sibuya, 2014).&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: title title-2
+# Impacts of interval censoring
+
+Japanese (unvalidated) data are interval-censored and right-truncated
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/japanese-1.png" alt="Profile likelihood ratio confidence intervals by threshold (left) and sampling distribution with(out) rounding (right)." width="65%" /&gt;
+&lt;p class="caption"&gt;Profile likelihood ratio confidence intervals by threshold (left) and sampling distribution with(out) rounding (right).&lt;/p&gt;
+&lt;/div&gt;
+
+---
+name: outline
+class: title title-2
+
+# Lack of (threshold) stability
+
+- .small[The hazard doesn't stabilize until 106 years or so.]
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/thstab-1.png" alt="Threshold stability plots for France and Italy (left), and Netherlands (right)." width="60%" /&gt;
+&lt;p class="caption"&gt;Threshold stability plots for France and Italy (left), and Netherlands (right).&lt;/p&gt;
+&lt;/div&gt;
+Take home message: one cannot use low thresholds for extrapolation.
+
+
+---
+name: outline
+class: title title-2
+
+# Is the lifetime distribution bounded?
+
+Mathematically speaking, is `\(t_F=\sup\{t: F(t)&lt;1\} = \infty\)`?
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="EVA2021-Belzile_files/figure-html/profile_lifetime-1.png" alt="Profile likelihood for endpoint for various countries and three thresholds." width="80%" /&gt;
+&lt;p class="caption"&gt;Profile likelihood for endpoint for various countries and three thresholds.&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+class: title title-2
+
+# You have no power in here!
+
+The power of a likelihood ratio test for detecting a finite endpoint (obtained by simulating records with a generalized Pareto distribution with lifespan `\(t_F\)`) is high: based on France/Italy/IDL data (2016 version),
+
+- 125 years: combined power of 97%;
+- 130 years: combined power of 83%;
+- 135 years: combined power of 66%.
+
+Suggests that the human lifespan lies well beyond any lifetime yet observed
+---
+
+name: outline
+class: title title-2
+
+# Supercentenarians [don't] live forever...
+
+- Estimated exponential distribution above 110 years has mean 0.5 (0.46, 0.53)
+
+--
+
+- Surviving until 130 years conditional on surviving until 110 years
+  - is equivalent to obtaining 20 heads in a row
+  - a less than one-in-a-million chance...
+
+---
+
+# References
+
+- Léo R. Belzile, Anthony C. Davison, Jutta Gampe, Holger Rootzén and Dmitrii Zholud (2022). Is there a cap on longevity? A statistical review., Annual Reviews of Statistics and its Applications.
+- Léo R. Belzile and Anthony C. Davison (2020). Improved inference for risk measures of univariate extremes (2021+), arXiv:2007.10780 preprint.
+- Léo R. Belzile, Anthony C. Davison, Holger Rootzén and Dmitrii Zholud (2021+). Human mortality at extreme age., arXiv:2001.04507 preprint.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": true
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
